@@ -14,7 +14,7 @@ End Enum
 
 'mainシートの行定数
 Enum MAIN_ROW
-    DATE_ = 2
+    date_ = 2
     CARRY_OVER_STOCK = 3
     PRICE_CUT = 4
     DELIVERY = 5

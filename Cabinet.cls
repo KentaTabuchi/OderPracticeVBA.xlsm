@@ -97,7 +97,6 @@ Public Function DiscardItems() As Integer
   Next i
   DiscardItems = discardNum
   PrintItems
-  Debug.Print "Cabinet:DiscardItems$ loss=", discardNum
 End Function
 
 

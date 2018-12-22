@@ -24,7 +24,7 @@ Public Sub IPhase_ExecutePhase()
     Set ws = Worksheets("main")
     ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, MAIN_COLUMN.number) = record.GetStock
     ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, MAIN_COLUMN.Price) = record.GetStock * 100
-    ws.Cells(MAIN_ROW.DATE_, MAIN_COLUMN.number) = record.GetDate
+    ws.Cells(MAIN_ROW.date_, MAIN_COLUMN.number) = record.GetDate
     
     Main.GetCabinet.PriceCutItems
     ws.Cells(MAIN_ROW.PRICE_CUT, MAIN_COLUMN.number) = Main.GetCabinet.GetPriceCutNum

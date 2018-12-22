@@ -39,7 +39,7 @@ Private Sub Initialize()
     
     Dim ws As Worksheet
     Set ws = Worksheets("main")
-    ws.Cells(MAIN_ROW.DATE_, 5).ClearContents
+    ws.Cells(MAIN_ROW.date_, 5).ClearContents
     ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, 5).ClearContents
     ws.Cells(MAIN_ROW.DELIVERY, 5).ClearContents
     ws.Cells(MAIN_ROW.sales, 5).ClearContents

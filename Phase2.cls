@@ -18,10 +18,12 @@ Public Sub IPhase_ExecutePhase()
     
     Dim record As SalesData
     Set record = Main.GetIndicator.GetRecord
+    Dim cabinet_ As Cabinet
+    Set cabinet_ = Main.GetCabinet
     
-    record.SetSales (Main.GetCabinet.DecideSales)
-    record.SetSalesPrice (Main.GetCabinet.GetSalesPrice)
-    
+    record.SetSales (cabinet_.DecideSales)
+    record.SetSalesPrice (cabinet_.GetSalesPrice)
+    record.SetPriceCut (cabinet_.GetPriceCutNum)
     record.SetStock (record.GetStock - record.GetSales)
 
     Main.GetIndicator.UpdateRecord sales_:=record.GetSales

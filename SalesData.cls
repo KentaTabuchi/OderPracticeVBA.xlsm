@@ -23,8 +23,8 @@ Private m_priceCut As Integer
 Public Function GetDate()
     GetDate = m_date
 End Function
-Public Sub SetDate(DATE_ As Date)
-    m_date = DATE_
+Public Sub SetDate(date_ As Date)
+    m_date = date_
 End Sub
 
 Public Function GetDelivery()
