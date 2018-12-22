@@ -25,7 +25,7 @@ Enum MAIN_ROW
 End Enum
 'mainƒV[ƒg‚Ì—ñ’è”
 Enum MAIN_COLUMN
-    Number = 7
+    number = 7
     Price = 8
 End Enum
 

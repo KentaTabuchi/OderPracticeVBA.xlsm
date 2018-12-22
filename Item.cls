@@ -16,7 +16,7 @@ Private m_price As Integer
 
 Public Sub Class_Initialize()
     m_price = 100
-    m_limit = Main.GetIndicator.GetRecord.GetDate + 2
+    m_limit = Main.GetIndicator.GetRecord.GetDate + 4 'リードタイム２+入荷許容２
 End Sub
 
 

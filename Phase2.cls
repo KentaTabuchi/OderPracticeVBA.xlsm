@@ -19,11 +19,11 @@ Public Sub IPhase_ExecutePhase()
     Dim record As SalesData
     Set record = Main.GetIndicator.GetRecord
     
-   
-    record.SetSalesPrice (Main.GetCabinet.CountSalesPrice)
-    record.SetSales (Main.GetCabinet.SellItems)
+    record.SetSales (Main.GetCabinet.DecideSales)
+    record.SetSalesPrice (Main.GetCabinet.GetSalesPrice)
+    
     record.SetStock (record.GetStock - record.GetSales)
-    record.SetPriceCut (record.GetPriceCut)
+
     Main.GetIndicator.UpdateRecord sales_:=record.GetSales
     Main.GetIndicator.UpdateRecord priceCut_:=record.GetPriceCut
     
@@ -34,10 +34,9 @@ Public Sub IPhase_ExecutePhase()
     
     Dim ws1 As Worksheet
     Set ws1 = Worksheets("main")
-    ws1.Cells(MAIN_ROW.sales, MAIN_COLUMN.Number) = record.GetSales
+    ws1.Cells(MAIN_ROW.sales, MAIN_COLUMN.number) = record.GetSales
     ws1.Cells(MAIN_ROW.sales, MAIN_COLUMN.Price) = record.GetSalesPrice
-   ' ws1.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.Number) = record.GetStock
-    
+   
     Dim ws2 As Worksheet
     Set ws2 = Worksheets("data")
     ws2.Cells(Main.GetIndicator.GetRow, DATA_COLUMN.sales) = record.GetSales

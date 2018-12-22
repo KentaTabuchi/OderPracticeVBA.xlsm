@@ -26,11 +26,8 @@ Public Sub IPhase_ExecutePhase()
     
     Main.GetCabinet.DisplayItems (Main.GetIndicator.GetRecord.GetDelivery)
     
-    ws.Cells(MAIN_ROW.DELIVERY, MAIN_COLUMN.Number) = record.GetDelivery
+    ws.Cells(MAIN_ROW.DELIVERY, MAIN_COLUMN.number) = record.GetDelivery
     ws.Cells(MAIN_ROW.DELIVERY, MAIN_COLUMN.Price) = record.GetDelivery * 100
-    
-    'ws.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.Number) = record.GetStock
-    'ws.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.Price) = record.GetStock * 100
 
     
 End Sub

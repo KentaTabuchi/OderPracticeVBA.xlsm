@@ -22,13 +22,13 @@ Public Sub IPhase_ExecutePhase()
     
     Dim ws As Worksheet
     Set ws = Worksheets("main")
-    ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, MAIN_COLUMN.Number) = record.GetStock
+    ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, MAIN_COLUMN.number) = record.GetStock
     ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, MAIN_COLUMN.Price) = record.GetStock * 100
-    ws.Cells(MAIN_ROW.DATE_, MAIN_COLUMN.Number) = record.GetDate
-    'ws.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.Number) = record.GetStock
-    'ws.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.Price) = record.GetStock * 100
-    ws.Cells(MAIN_ROW.PRICE_CUT, MAIN_COLUMN.Number) = Main.GetCabinet.PriceCutItems
-    ws.Cells(MAIN_ROW.PRICE_CUT, MAIN_COLUMN.Price) = Main.GetCabinet.PriceCutItems * -20
+    ws.Cells(MAIN_ROW.DATE_, MAIN_COLUMN.number) = record.GetDate
+    
+    Main.GetCabinet.PriceCutItems
+    ws.Cells(MAIN_ROW.PRICE_CUT, MAIN_COLUMN.number) = Main.GetCabinet.GetPriceCutNum
+    ws.Cells(MAIN_ROW.PRICE_CUT, MAIN_COLUMN.Price) = Main.GetCabinet.GetPriceCutNum * -20
   
 End Sub
 
@@ -45,11 +45,11 @@ Private Sub RefleshTable()
         Dim k As Integer
         
         For i = 2 To 7
-            ws.Cells(i, MAIN_COLUMN.Number).ClearContents
+            ws.Cells(i, MAIN_COLUMN.number).ClearContents
             ws.Cells(i, MAIN_COLUMN.Price).ClearContents
         Next i
         For i = 16 To 100
-            ws.Cells(i, MAIN_COLUMN.Number).ClearContents
+            ws.Cells(i, MAIN_COLUMN.number).ClearContents
             ws.Cells(i, MAIN_COLUMN.Price).ClearContents
         Next i
     

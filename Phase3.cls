@@ -30,10 +30,10 @@ Public Sub IPhase_ExecutePhase()
         record.SetStock (0)
     End If
     
-    ws.Cells(MAIN_ROW.loss, MAIN_COLUMN.Number) = record.GetLoss
+    ws.Cells(MAIN_ROW.loss, MAIN_COLUMN.number) = record.GetLoss
     ws.Cells(MAIN_ROW.loss, MAIN_COLUMN.Price) = record.GetLoss * -100
     
-    'ws.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.Number) = record.GetStock
+    ws.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.number) = record.GetStock
     
     'ここに値引き後の在庫金額を書く。正値在庫＋値引き在庫
     
