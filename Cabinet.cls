@@ -16,6 +16,7 @@ Private m_items As Collection
 Private m_salesNum As Integer
 Private m_salesPrice As Integer
 Private m_priceCutNum As Integer
+Private m_customerNum As Integer
 Private id As Integer
 
 
@@ -44,16 +45,18 @@ End Sub
 Public Function DecideSales() As Integer
  
     Dim Customers As Collection
-    Dim customerNum As Integer
     
     Const max = 10
     Const min = 5
     Randomize
-    customerNum = Int((max - min + 1) * Rnd + min)
+    
+    m_customerNum = 0
+    m_customerNum = Int((max - min + 1) * Rnd + min)
+    
     m_salesPrice = 0 '–ˆ‰ñ‰Šú‰»‚µ‚È‚¢‚Æ‘O‚Ì“ú‚Ì•ª‚ªc‚Á‚½‚Ü‚Ü‚É‚È‚éB
     Dim decideSales_ As Integer
     Dim i As Integer
-    For i = 0 To customerNum
+    For i = 0 To m_customerNum
         Dim customer_ As Customer
         Set customer_ = New Customer
         decideSales_ = decideSales_ + customer_.BuyItems
@@ -127,5 +130,8 @@ Public Function GetSalesPrice() As Integer
 End Function
 Public Function GetPriceCutNum() As Integer
     GetPriceCutNum = m_priceCutNum
+End Function
+Public Function GetCustomerNum() As Integer
+    GetCustomerNum = m_customerNum
 End Function
 

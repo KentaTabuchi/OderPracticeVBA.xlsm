@@ -12,7 +12,7 @@ Option Explicit
 Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
-    Debug.Print "phase:LAST_4"
+  
     
     'TODO:ここで日付変更になるので表の日付を一列づつずらす処理を書く
      
@@ -29,7 +29,13 @@ Public Sub IPhase_ChangePhase()
         Dim ws As Worksheet
         Set ws = Worksheets("main")
         ws.Cells(20, 4).ClearContents
-        Main.SetCurrentPhase (PhaseNumber.START_0)
+        
+        Select Case Main.GetCountDay
+        Case 0, 1:
+            Main.SetCurrentPhase (PhaseNumber.LAST_4)
+        Case Else:
+            Main.SetCurrentPhase (PhaseNumber.START_0)
+        End Select
     End If
 End Sub
 

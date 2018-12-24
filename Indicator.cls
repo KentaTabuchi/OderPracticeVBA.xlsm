@@ -51,6 +51,7 @@ Public Function GetRecord() As SalesData
     m_salesData.SetSales (ws.Cells(m_row, DATA_COLUMN.sales))
     m_salesData.SetLoss (ws.Cells(m_row, DATA_COLUMN.loss))
     m_salesData.SetPriceCut (ws.Cells(m_row, DATA_COLUMN.priceCut))
+    m_salesData.SetCustomerNum (ws.Cells(m_row, DATA_COLUMN.CUSTOMER_NUM))
     
     Set GetRecord = m_salesData
         
@@ -65,14 +66,15 @@ Private Sub PrintCursor()
 End Sub
 
 'dataÉVÅ[ÉgÇ÷ÇÃèëÇ´çûÇ›èàóù
-Public Sub UpdateRecord(Optional sales_ As Integer, Optional loss_ As Integer, Optional stock_ As Integer, Optional oder_ As Integer, Optional priceCut_ As Integer)
+Public Sub UpdateRecord(Optional sales_ As Integer, Optional loss_ As Integer, Optional stock_ As Integer, Optional oder_ As Integer, Optional priceCut_ As Integer, Optional customerNum_ As Integer)
     
     If (sales_ <> 0) Then m_salesData.SetSales (sales_)
     If (loss_ <> 0) Then m_salesData.SetLoss (loss_)
     If (stock_ <> 0) Then m_salesData.SetStock (stock_)
     If (oder_ <> 0) Then m_salesData.SetOder (oder_)
     If (priceCut_ <> 0) Then m_salesData.SetPriceCut (priceCut_)
-     
+    If (customerNum_ <> 0) Then m_salesData.SetCustomerNum (customerNum_)
+    
      
     Dim ws As Worksheet
     Set ws = Worksheets("data")
@@ -81,6 +83,7 @@ Public Sub UpdateRecord(Optional sales_ As Integer, Optional loss_ As Integer, O
     ws.Cells(m_row, DATA_COLUMN.priceCut) = m_salesData.GetPriceCut
     ws.Cells(m_row, DATA_COLUMN.STOCK) = m_salesData.GetStock
     ws.Cells(m_row, DATA_COLUMN.Oder) = m_salesData.GetOder
+    ws.Cells(m_row, DATA_COLUMN.CUSTOMER_NUM) = m_salesData.GetCustomerNum
        
 End Sub
 

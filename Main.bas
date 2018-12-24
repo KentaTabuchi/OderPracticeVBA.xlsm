@@ -7,7 +7,7 @@ Private m_indicator As Indicator
 Private m_currentPhase As PhaseNumber
 Private m_Cabinet As Cabinet
 
-
+Private m_countDay As Integer
 
 Public Sub OnAdvanceTheTimeButtonClick()
 
@@ -16,8 +16,18 @@ Public Sub OnAdvanceTheTimeButtonClick()
         m_isInitialize = True
     End If
     
-    ExecutePhase (m_currentPhase)
-
+    Select Case m_countDay
+    Case 0:
+        Message.WriteLine Strings.str_InputFirstOder
+        m_countDay = m_countDay + 1
+        ExecutePhase (PhaseNumber.LAST_4)
+    Case 1:
+        Message.WriteLine Strings.str_InputSecondOder
+        m_countDay = m_countDay + 1
+        ExecutePhase (PhaseNumber.LAST_4)
+    Case Else
+        ExecutePhase (m_currentPhase)
+    End Select
 End Sub
 
 Public Sub ExecutePhase(phase_ As PhaseNumber)
@@ -59,8 +69,11 @@ End Function
 Public Sub SetCurrentPhase(phase_ As PhaseNumber)
     m_currentPhase = phase_
 End Sub
-Public Function GetCabinet()
+Public Function GetCabinet() As Cabinet
     Set GetCabinet = m_Cabinet
+End Function
+Public Function GetCountDay() As Integer
+    GetCountDay = m_countDay
 End Function
 
 Private Sub ClearTable()

@@ -25,9 +25,11 @@ Public Sub IPhase_ExecutePhase()
     record.SetSalesPrice (cabinet_.GetSalesPrice)
     record.SetPriceCut (cabinet_.GetPriceCutNum)
     record.SetStock (record.GetStock - record.GetSales)
+    record.SetCustomerNum (cabinet_.GetCustomerNum)
 
     Main.GetIndicator.UpdateRecord sales_:=record.GetSales
     Main.GetIndicator.UpdateRecord priceCut_:=record.GetPriceCut
+    Main.GetIndicator.UpdateRecord customerNum_:=record.GetCustomerNum
     
     If (record.GetStock <= 0) Then
         record.SetStock (0)

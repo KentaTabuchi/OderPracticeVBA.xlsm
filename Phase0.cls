@@ -17,6 +17,7 @@ Public Sub IPhase_ExecutePhase()
     RefleshTable
     Message.ClearAll
     
+    
     Dim record As SalesData
     Set record = Main.GetIndicator.GetRecord
     

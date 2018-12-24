@@ -10,6 +10,7 @@ Enum DATA_COLUMN
     priceCut = 6
     STOCK = 7
     Oder = 8
+    CUSTOMER_NUM = 9
 End Enum
 
 'mainシートの行定数

@@ -19,6 +19,7 @@ Private m_loss As Integer
 Private m_stock As Integer
 Private m_oder As Integer
 Private m_priceCut As Integer
+Private m_customerNum As Integer
 
 Public Function GetDate()
     GetDate = m_date
@@ -75,5 +76,12 @@ End Function
 
 Public Sub SetPriceCut(priceCut_ As Integer)
     m_priceCut = priceCut_
+End Sub
+Public Function GetCustomerNum() As Integer
+    GetCustomerNum = m_customerNum
+End Function
+
+Public Sub SetCustomerNum(customerNum_ As Integer)
+    m_customerNum = customerNum_
 End Sub
 
