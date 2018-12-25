@@ -13,6 +13,11 @@ Enum DATA_COLUMN
     CUSTOMER_NUM = 9
 End Enum
 
+Enum DATA_ROW
+    TABLE_TOP = 2
+    TABLE_END = 34
+End Enum
+
 'mainシートの行定数
 Enum MAIN_ROW
     date_ = 2

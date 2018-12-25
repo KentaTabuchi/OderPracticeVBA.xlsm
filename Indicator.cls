@@ -23,8 +23,8 @@ Public Function GetRow() As Integer
 End Function
 
 Public Function MoveOn() As SalesData
-    If (m_row = 32) Then
-        m_row = 32
+    If (m_row = 34) Then
+        m_row = 34
     Else
         m_row = m_row + 1
     End If
@@ -42,16 +42,19 @@ Public Function TurnBack() As SalesData
     Set TurnBack = GetRecord
 End Function
 
-Public Function GetRecord() As SalesData
+Public Function GetRecord(Optional row As Integer) As SalesData
     Dim ws As Worksheet
     Set ws = Worksheets("data")
     
-    m_salesData.SetDate (ws.Cells(m_row, DATA_COLUMN.DATE_2))
-    m_salesData.SetDelivery (ws.Cells(m_row, DATA_COLUMN.DELIVERY))
-    m_salesData.SetSales (ws.Cells(m_row, DATA_COLUMN.sales))
-    m_salesData.SetLoss (ws.Cells(m_row, DATA_COLUMN.loss))
-    m_salesData.SetPriceCut (ws.Cells(m_row, DATA_COLUMN.priceCut))
-    m_salesData.SetCustomerNum (ws.Cells(m_row, DATA_COLUMN.CUSTOMER_NUM))
+    If row = 0 Then
+        row = m_row
+    End If
+    m_salesData.SetDate (ws.Cells(row, DATA_COLUMN.DATE_2))
+    m_salesData.SetDelivery (ws.Cells(row, DATA_COLUMN.DELIVERY))
+    m_salesData.SetSales (ws.Cells(row, DATA_COLUMN.sales))
+    m_salesData.SetLoss (ws.Cells(row, DATA_COLUMN.loss))
+    m_salesData.SetPriceCut (ws.Cells(row, DATA_COLUMN.priceCut))
+    m_salesData.SetCustomerNum (ws.Cells(row, DATA_COLUMN.CUSTOMER_NUM))
     
     Set GetRecord = m_salesData
         
@@ -86,5 +89,24 @@ Public Sub UpdateRecord(Optional sales_ As Integer, Optional loss_ As Integer, O
     ws.Cells(m_row, DATA_COLUMN.CUSTOMER_NUM) = m_salesData.GetCustomerNum
        
 End Sub
+
+'日付を引数にしてレコードを返す
+Public Function FindRecordByDate(date_ As Date) As SalesData
+    
+    Dim row As Integer
+    Dim i As Integer
+    Dim ws As Worksheet: Set ws = Worksheets("data")
+    
+    For i = DATA_ROW.TABLE_TOP To DATA_ROW.TABLE_END
+        If (ws.Cells(i, DATA_COLUMN.DATE_2) = date_) Then
+            row = i
+        End If
+    Next i
+    
+    Dim salesData_ As SalesData
+    Set salesData_ = GetRecord(row)
+    Set FindRecordByDate = salesData_
+    
+End Function
 
 
