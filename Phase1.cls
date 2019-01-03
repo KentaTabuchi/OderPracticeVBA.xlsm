@@ -15,17 +15,17 @@ Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
     
-    Dim record As SalesData
-    Set record = Main.GetIndicator.GetRecord
+    Dim salesData_ As SalesData
+    Set salesData_ = Main.GetIndicator.GetRecord
 
-    record.SetStock (record.GetStock + record.GetDelivery)
-    Main.GetIndicator.UpdateRecord stock_:=record.GetStock
+    salesData_.SetStock (salesData_.GetStock + salesData_.GetDelivery)
+    Main.GetIndicator.UpdateRecord salesData_
     Main.GetCabinet.DisplayItems (Main.GetIndicator.GetRecord.GetDelivery)
-    TablePrinter.PrintCurrentRecordToTable record
+    TablePrinter.PrintCurrentRecordToTable salesData_
     
 End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.SELL_2)
-    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_SELL
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.Column) = Strings.PHASE_SELL
 End Sub

@@ -38,7 +38,7 @@ End Enum
 
 Enum MAIN_PHASE_PAIN
     ROW = 24
-    COLUMN = 2
+    Column = 2
 End Enum
 
 Enum PhaseNumber

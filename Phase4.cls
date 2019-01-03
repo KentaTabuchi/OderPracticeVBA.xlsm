@@ -29,17 +29,19 @@ Public Sub IPhase_ChangePhase()
         Select Case Main.GetCountDay
         Case 0, 1:
             Main.SetCurrentPhase (PhaseNumber.LAST_4)
-            MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_ODER
+            MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.Column) = Strings.PHASE_ODER
         Case Else:
             Main.SetCurrentPhase (PhaseNumber.START_0)
-            MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_START
+            MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.Column) = Strings.PHASE_START
         End Select
     End If
 End Sub
 
 Private Sub Oder()
-
-        Main.GetIndicator.UpdateRecord oder_:=UserInputter.GetOderValue
+        Dim salesData_ As SalesData
+        Set salesData_ = Main.GetIndicator.GetRecord
+        salesData_.SetOder UserInputter.GetOderValue
+        Main.GetIndicator.UpdateRecord salesData_
         MessagePrinter.WriteLine GetIndicator.GetRecord.GetOder & Strings.FINISH_ODER, 4
         
 End Sub

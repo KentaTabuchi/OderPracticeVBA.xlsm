@@ -15,25 +15,24 @@ Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
     
-    Dim record As SalesData
-    Set record = Main.GetIndicator.GetRecord
+    Dim salesData_ As SalesData
+    Set salesData_ = Main.GetIndicator.GetRecord
     
     Dim ws As Worksheet
     Set ws = Worksheets("main")
     
-    record.SetLoss (Main.GetCabinet.DiscardItems)
-    MessagePrinter.WriteLine record.GetLoss & "å¬îpä¸ÇµÇ‹ÇµÇΩÅB"
-    Main.GetIndicator.UpdateRecord loss_:=record.GetLoss
+    salesData_.SetLoss (Main.GetCabinet.DiscardItems)
+    MessagePrinter.WriteLine salesData_.GetLoss & "å¬îpä¸ÇµÇ‹ÇµÇΩÅB"
+    Main.GetIndicator.UpdateRecord salesData_
     
-    record.SetStock (record.GetStock - record.GetLoss)
-    If (record.GetStock < 0) Then
-        record.SetStock (0)
+    salesData_.SetStock (salesData_.GetStock - salesData_.GetLoss)
+    If (salesData_.GetStock < 0) Then
+        salesData_.SetStock (0)
     End If
     
-    Main.GetIndicator.UpdateRecord stock_:=record.GetStock
+    Main.GetIndicator.UpdateRecord salesData_
     
-    
-    TablePrinter.PrintCurrentRecordToTable record
+    TablePrinter.PrintCurrentRecordToTable salesData_
     
     'TODO:Ç±Ç±Ç…ílà¯Ç´å„ÇÃç›å…ã‡äzÇèëÇ≠ÅBê≥ílç›å…Å{ílà¯Ç´ç›å…
     
@@ -42,6 +41,6 @@ End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.LAST_4)
-    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_ODER
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.Column) = Strings.PHASE_ODER
 End Sub
 

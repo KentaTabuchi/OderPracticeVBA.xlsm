@@ -15,36 +15,35 @@ Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
     
-    Dim record As SalesData
-    Set record = Main.GetIndicator.GetRecord
+    Dim salesData_ As SalesData
+    Set salesData_ = Main.GetIndicator.GetRecord
     Dim cabinet_ As Cabinet
     Set cabinet_ = Main.GetCabinet
     
     cabinet_.DecideSales
-    MessagePrinter.WriteLine record.GetSales & "å¬îÃîÑÇµÇ‹ÇµÇΩÅB"
-    record.SetSales (cabinet_.GetSalesNum)
-    record.SetSalesPrice (cabinet_.GetSalesPrice)
-    record.SetPriceCut (cabinet_.GetPriceCutNum)
-    record.SetStock (record.GetStock - record.GetSales)
-    record.SetCustomerNum (cabinet_.GetCustomerNum)
-
-    Main.GetIndicator.UpdateRecord sales_:=record.GetSales
-    Main.GetIndicator.UpdateRecord priceCut_:=record.GetPriceCut
-    Main.GetIndicator.UpdateRecord customerNum_:=record.GetCustomerNum
-    Main.GetIndicator.UpdateRecord stock_:=record.GetStock
     
-    If (record.GetStock <= 0) Then
-        record.SetStock (0)
+    MessagePrinter.WriteLine salesData_.GetSales & "å¬îÃîÑÇµÇ‹ÇµÇΩÅB"
+    
+    salesData_.SetSales (cabinet_.GetSalesNum)
+    salesData_.SetSalesPrice (cabinet_.GetSalesPrice)
+    salesData_.SetPriceCut (cabinet_.GetPriceCutNum)
+    salesData_.SetStock (salesData_.GetStock - salesData_.GetSales)
+    salesData_.SetCustomerNum (cabinet_.GetCustomerNum)
+
+    Main.GetIndicator.UpdateRecord salesData_
+    
+    If (salesData_.GetStock <= 0) Then
+        salesData_.SetStock (0)
         MessagePrinter.WriteLine (Strings.OUT_OF_STOCK)
     End If
     
-    TablePrinter.PrintCurrentRecordToTable record
+    TablePrinter.PrintCurrentRecordToTable salesData_
    
 End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.LOSS_3)
-    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_LOSS
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.Column) = Strings.PHASE_LOSS
 End Sub
 
 

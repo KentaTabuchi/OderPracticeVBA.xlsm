@@ -15,16 +15,16 @@ Public Sub IPhase_ExecutePhase()
 
     MessagePrinter.ClearAll
        
-    Dim record As SalesData
-    Set record = Main.GetIndicator.GetRecord
+    Dim salesData_ As SalesData
+    Set salesData_ = Main.GetIndicator.GetRecord
     
-    TablePrinter.PrintCurrentRecordToTable record
+    TablePrinter.PrintCurrentRecordToTable salesData_
   
 End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.DELIVERY_1)
-    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_DELIVERY
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.Column) = Strings.PHASE_DELIVERY
 End Sub
 
 

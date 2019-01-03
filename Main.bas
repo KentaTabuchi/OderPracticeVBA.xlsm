@@ -34,6 +34,8 @@ End Sub
 
 Private Sub Initialize()
     
+    DevelopmentTools.ClearImmediate
+    
     Set m_indicator = New Indicator
     Set m_Cabinet = New Cabinet
     m_currentPhase = PhaseNumber.START_0
@@ -54,7 +56,7 @@ Private Sub Initialize()
     
     MessagePrinter.ClearAll
     ClearTable
-    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Empty
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.Column) = Empty
     
 End Sub
 Public Function GetIndicator() As Indicator
