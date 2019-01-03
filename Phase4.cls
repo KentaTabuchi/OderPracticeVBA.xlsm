@@ -12,59 +12,35 @@ Option Explicit
 Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
-  
-    
-    'TODO:ここで日付変更になるので表の日付を一列づつずらす処理を書く
-     
-    If (IsOder) Then
+   
+    If (UserInputter.HasOdered) Then
         Oder
         Main.GetIndicator.MoveOn
-        Scroll
+        TablePrinter.PrintLogRecordsToTable
+        Main.SetCountDay (Main.GetCountDay + 1)
     End If
        
 End Sub
 
 Public Sub IPhase_ChangePhase()
-    If (IsOder) Then
-        Dim ws As Worksheet
-        Set ws = Worksheets("main")
-        ws.Cells(20, 4).ClearContents
-        
+    If (UserInputter.HasOdered) Then
+
+        UserInputter.Clear
         Select Case Main.GetCountDay
         Case 0, 1:
             Main.SetCurrentPhase (PhaseNumber.LAST_4)
+            MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_ODER
         Case Else:
             Main.SetCurrentPhase (PhaseNumber.START_0)
+            MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_START
         End Select
     End If
 End Sub
 
-Private Function IsOder() As Boolean
-    IsOder = False
-    
-    Dim ws As Worksheet
-    Set ws = Worksheets("main")
-    If (ws.Cells(20, 4) <> "") Then
-        IsOder = True
-    Else
-        Message.WriteLine Strings.str_YetOder, 4
-    End If
-   
-End Function
-
 Private Sub Oder()
-        Dim ws As Worksheet
-        Set ws = Worksheets("main")
-        Main.GetIndicator.UpdateRecord oder_:=ws.Cells(20, 4)
-        Message.WriteLine GetIndicator.GetRecord.GetOder & Strings.str_FinishOder, 4
+
+        Main.GetIndicator.UpdateRecord oder_:=UserInputter.GetOderValue
+        MessagePrinter.WriteLine GetIndicator.GetRecord.GetOder & Strings.FINISH_ODER, 4
         
 End Sub
-Private Sub Scroll()
-    Dim ws As Worksheet
-    Set ws = Worksheets("main")
-    Dim i As Integer
-    For i = 21 To 6 Step -3
-        Range(Cells(2, i), Cells(8, i + 2)).Copy Cells(2, i + 3)
-        Range(Cells(15, i), Cells(100, i + 2)).Copy Cells(15, i + 3)
-    Next i
-End Sub
+

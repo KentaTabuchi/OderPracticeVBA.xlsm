@@ -14,24 +14,18 @@ Option Explicit
 Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
-    Debug.Print "phase:DELIVERY_1"
     
     Dim record As SalesData
     Set record = Main.GetIndicator.GetRecord
-    
-    Dim ws As Worksheet
-    Set ws = Worksheets("main")
-    
-    record.SetStock (record.GetStock + record.GetDelivery)
-    
-    Main.GetCabinet.DisplayItems (Main.GetIndicator.GetRecord.GetDelivery)
-    
-    ws.Cells(MAIN_ROW.DELIVERY, MAIN_COLUMN.number) = record.GetDelivery
-    ws.Cells(MAIN_ROW.DELIVERY, MAIN_COLUMN.Price) = record.GetDelivery * 100
 
+    record.SetStock (record.GetStock + record.GetDelivery)
+    Main.GetIndicator.UpdateRecord stock_:=record.GetStock
+    Main.GetCabinet.DisplayItems (Main.GetIndicator.GetRecord.GetDelivery)
+    TablePrinter.PrintCurrentRecordToTable record
     
 End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.SELL_2)
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_SELL
 End Sub

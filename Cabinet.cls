@@ -42,7 +42,7 @@ End Sub
 
 
 '当日の販売数を算出する。
-Public Function DecideSales() As Integer
+Public Sub DecideSales()
  
     Dim Customers As Collection
     
@@ -62,9 +62,9 @@ Public Function DecideSales() As Integer
         decideSales_ = decideSales_ + customer_.BuyItems
         m_salesPrice = m_salesPrice + customer_.GetPay '一人当たりの支払いを人数分、合計してメンバ変数に保存。
     Next i
-    DecideSales = decideSales_
+    m_salesNum = decideSales_
     
-End Function
+End Sub
 
 '当日が賞味期限の商品を２０円値引きして、結果をメンバ変数に保存する。
 '他クラスから値引き数を呼び出すときはfunc GetPriceCutNum()を呼ぶ。(これをそのまま２回呼ぶとバグるため）
@@ -133,5 +133,8 @@ Public Function GetPriceCutNum() As Integer
 End Function
 Public Function GetCustomerNum() As Integer
     GetCustomerNum = m_customerNum
+End Function
+Public Function GetSalesNum() As Integer
+    GetSalesNum = m_salesNum
 End Function
 

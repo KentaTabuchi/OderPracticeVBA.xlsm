@@ -6,7 +6,6 @@ Private m_isInitialize As Boolean
 Private m_indicator As Indicator
 Private m_currentPhase As PhaseNumber
 Private m_Cabinet As Cabinet
-
 Private m_countDay As Integer
 
 Public Sub OnAdvanceTheTimeButtonClick()
@@ -18,12 +17,10 @@ Public Sub OnAdvanceTheTimeButtonClick()
     
     Select Case m_countDay
     Case 0:
-        Message.WriteLine Strings.str_InputFirstOder
-        m_countDay = m_countDay + 1
+        MessagePrinter.WriteLine Strings.INPUT_FIRST_ODER
         ExecutePhase (PhaseNumber.LAST_4)
     Case 1:
-        Message.WriteLine Strings.str_InputSecondOder
-        m_countDay = m_countDay + 1
+        MessagePrinter.WriteLine Strings.INPUT_SECOND_ODER
         ExecutePhase (PhaseNumber.LAST_4)
     Case Else
         ExecutePhase (m_currentPhase)
@@ -36,7 +33,7 @@ Public Sub ExecutePhase(phase_ As PhaseNumber)
 End Sub
 
 Private Sub Initialize()
-    Debug.Print "Main_Initialize"
+    
     Set m_indicator = New Indicator
     Set m_Cabinet = New Cabinet
     m_currentPhase = PhaseNumber.START_0
@@ -51,13 +48,13 @@ Private Sub Initialize()
     Set ws = Worksheets("main")
     ws.Cells(MAIN_ROW.date_, 5).ClearContents
     ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, 5).ClearContents
-    ws.Cells(MAIN_ROW.DELIVERY, 5).ClearContents
+    ws.Cells(MAIN_ROW.delivery, 5).ClearContents
     ws.Cells(MAIN_ROW.sales, 5).ClearContents
     ws.Cells(MAIN_ROW.loss, 5).ClearContents
-    'ws.Cells(MAIN_ROW.CURRENT_STOCK, 5).ClearContents
     
-    Message.ClearAll
+    MessagePrinter.ClearAll
     ClearTable
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Empty
     
 End Sub
 Public Function GetIndicator() As Indicator
@@ -75,6 +72,10 @@ End Function
 Public Function GetCountDay() As Integer
     GetCountDay = m_countDay
 End Function
+Public Sub SetCountDay(value_ As Integer)
+    m_countDay = value_
+End Sub
+
 
 Private Sub ClearTable()
     Dim ws As Worksheet

@@ -14,7 +14,6 @@ Option Explicit
 Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
-    Debug.Print "phase:LOSS_3"
     
     Dim record As SalesData
     Set record = Main.GetIndicator.GetRecord
@@ -23,6 +22,7 @@ Public Sub IPhase_ExecutePhase()
     Set ws = Worksheets("main")
     
     record.SetLoss (Main.GetCabinet.DiscardItems)
+    MessagePrinter.WriteLine record.GetLoss & "個廃棄しました。"
     Main.GetIndicator.UpdateRecord loss_:=record.GetLoss
     
     record.SetStock (record.GetStock - record.GetLoss)
@@ -30,17 +30,18 @@ Public Sub IPhase_ExecutePhase()
         record.SetStock (0)
     End If
     
-    ws.Cells(MAIN_ROW.loss, MAIN_COLUMN.number) = record.GetLoss
-    ws.Cells(MAIN_ROW.loss, MAIN_COLUMN.Price) = record.GetLoss * -100
+    Main.GetIndicator.UpdateRecord stock_:=record.GetStock
     
-    ws.Cells(MAIN_ROW.CURRENT_STOCK, MAIN_COLUMN.number) = record.GetStock
     
-    'ここに値引き後の在庫金額を書く。正値在庫＋値引き在庫
+    TablePrinter.PrintCurrentRecordToTable record
     
-     Message.WriteLine Strings.str_PleaseTheOder, 4
+    'TODO:ここに値引き後の在庫金額を書く。正値在庫＋値引き在庫
+    
+     MessagePrinter.WriteLine Strings.PLEASE_THE_ODER, 4
 End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.LAST_4)
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_ODER
 End Sub
 

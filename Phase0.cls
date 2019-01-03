@@ -12,46 +12,19 @@ Option Explicit
 Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
-    Debug.Print "phase:START_0"
-        
-    RefleshTable
-    Message.ClearAll
-    
-    
+
+    MessagePrinter.ClearAll
+       
     Dim record As SalesData
     Set record = Main.GetIndicator.GetRecord
     
-    Dim ws As Worksheet
-    Set ws = Worksheets("main")
-    ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, MAIN_COLUMN.number) = record.GetStock
-    ws.Cells(MAIN_ROW.CARRY_OVER_STOCK, MAIN_COLUMN.Price) = record.GetStock * 100
-    ws.Cells(MAIN_ROW.date_, MAIN_COLUMN.number) = record.GetDate
-    
-    Main.GetCabinet.PriceCutItems
-    ws.Cells(MAIN_ROW.PRICE_CUT, MAIN_COLUMN.number) = Main.GetCabinet.GetPriceCutNum
-    ws.Cells(MAIN_ROW.PRICE_CUT, MAIN_COLUMN.Price) = Main.GetCabinet.GetPriceCutNum * -20
+    TablePrinter.PrintCurrentRecordToTable record
   
 End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.DELIVERY_1)
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_DELIVERY
 End Sub
 
-'mainシートの数字を消す。
-Private Sub RefleshTable()
-        Dim ws As Worksheet
-        Set ws = Worksheets("main")
-        
-        Dim i As Integer
-        Dim k As Integer
-        
-        For i = 2 To 7
-            ws.Cells(i, MAIN_COLUMN.number).ClearContents
-            ws.Cells(i, MAIN_COLUMN.Price).ClearContents
-        Next i
-        For i = 16 To 100
-            ws.Cells(i, MAIN_COLUMN.number).ClearContents
-            ws.Cells(i, MAIN_COLUMN.Price).ClearContents
-        Next i
-    
-End Sub
+

@@ -14,14 +14,15 @@ Option Explicit
 Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
-    Debug.Print "phase:SELL2"
     
     Dim record As SalesData
     Set record = Main.GetIndicator.GetRecord
     Dim cabinet_ As Cabinet
     Set cabinet_ = Main.GetCabinet
     
-    record.SetSales (cabinet_.DecideSales)
+    cabinet_.DecideSales
+    MessagePrinter.WriteLine record.GetSales & "å¬îÃîÑÇµÇ‹ÇµÇΩÅB"
+    record.SetSales (cabinet_.GetSalesNum)
     record.SetSalesPrice (cabinet_.GetSalesPrice)
     record.SetPriceCut (cabinet_.GetPriceCutNum)
     record.SetStock (record.GetStock - record.GetSales)
@@ -30,24 +31,20 @@ Public Sub IPhase_ExecutePhase()
     Main.GetIndicator.UpdateRecord sales_:=record.GetSales
     Main.GetIndicator.UpdateRecord priceCut_:=record.GetPriceCut
     Main.GetIndicator.UpdateRecord customerNum_:=record.GetCustomerNum
+    Main.GetIndicator.UpdateRecord stock_:=record.GetStock
     
     If (record.GetStock <= 0) Then
         record.SetStock (0)
-        Message.WriteLine (Strings.str_OutOfStock)
+        MessagePrinter.WriteLine (Strings.OUT_OF_STOCK)
     End If
     
-    Dim ws1 As Worksheet
-    Set ws1 = Worksheets("main")
-    ws1.Cells(MAIN_ROW.sales, MAIN_COLUMN.number) = record.GetSales
-    ws1.Cells(MAIN_ROW.sales, MAIN_COLUMN.Price) = record.GetSalesPrice
+    TablePrinter.PrintCurrentRecordToTable record
    
-    Dim ws2 As Worksheet
-    Set ws2 = Worksheets("data")
-    ws2.Cells(Main.GetIndicator.GetRow, DATA_COLUMN.sales) = record.GetSales
 End Sub
 
 Public Sub IPhase_ChangePhase()
     Main.SetCurrentPhase (PhaseNumber.LOSS_3)
+    MainSheet.Cells(MAIN_PHASE_PAIN.ROW, MAIN_PHASE_PAIN.COLUMN) = Strings.PHASE_LOSS
 End Sub
 
 

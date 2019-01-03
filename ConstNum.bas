@@ -4,7 +4,7 @@ Option Explicit
 
 Enum DATA_COLUMN
     DATE_2 = 2
-    DELIVERY = 3
+    delivery = 3
     sales = 4
     loss = 5
     priceCut = 6
@@ -23,7 +23,7 @@ Enum MAIN_ROW
     date_ = 2
     CARRY_OVER_STOCK = 3
     PRICE_CUT = 4
-    DELIVERY = 5
+    delivery = 5
     sales = 6
     loss = 7
     CURRENT_STOCK = 8
@@ -31,8 +31,14 @@ Enum MAIN_ROW
 End Enum
 'mainÉVÅ[ÉgÇÃóÒíËêî
 Enum MAIN_COLUMN
-    number = 7
-    Price = 8
+    TABLE_LEFT_EDGE = 6
+    number = 6
+    Price = 7
+End Enum
+
+Enum MAIN_PHASE_PAIN
+    ROW = 24
+    COLUMN = 2
 End Enum
 
 Enum PhaseNumber
