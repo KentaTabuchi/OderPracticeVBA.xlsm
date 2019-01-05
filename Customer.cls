@@ -21,7 +21,7 @@ Private m_pay As Integer 'éxï•äz
 Private m_motivation As Integer 'çwì¸à”ó~
 
 Private Sub Class_Initialize()
-    m_motivation = 30
+    m_motivation = 50
     
     Const max As Integer = 25
     Const min As Integer = -15
@@ -37,11 +37,11 @@ Public Function BuyItems() As Integer
     
     Dim i As Integer
     Dim item_ As Item
-    Dim cabinet_ As Cabinet: Set cabinet_ = Main.GetCabinet
+    Dim store_ As Store: Set store_ = Main.GetStore
     
    
-    For i = cabinet_.GetItems.Count - 1 To 1 Step -1
-        Set item_ = cabinet_.GetItems.Item(i)
+    For i = store_.GetItems.Count - 1 To 1 Step -1
+        Set item_ = store_.GetItems.Item(i)
         
         If IsBuy(item_) Then
             buyItems_ = buyItems_ + 1
@@ -53,7 +53,7 @@ Public Function BuyItems() As Integer
             m_motivation = m_motivation + Int((max - min + 1) * Rnd + min)
             m_motivation = m_motivation - 10
             
-            cabinet_.GetItems.Remove (i)
+            store_.GetItems.Remove (i)
         End If
   
     Next i

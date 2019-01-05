@@ -9,7 +9,9 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
+'************************************************************************************
 '納品フェイズ
+'************************************************************************************
 
 Implements IPhase
 
@@ -20,7 +22,7 @@ Public Sub IPhase_ExecutePhase()
 
     salesData_.SetStock (salesData_.GetStock + salesData_.GetDelivery)
     Main.GetIndicator.UpdateRecord salesData_
-    Main.GetCabinet.DisplayItems (Main.GetIndicator.GetRecord.GetDelivery)
+    Main.GetStore.DisplayItems (Main.GetIndicator.GetRecord.GetDelivery)
     TablePrinter.PrintCurrentRecordToTable salesData_
     
 End Sub

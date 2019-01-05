@@ -59,6 +59,7 @@ Public Sub ClearImmediate()
     wd.SetFocus
     SendKeys "^a", False
     SendKeys "{Del}", False
+   
  
 End Sub
 

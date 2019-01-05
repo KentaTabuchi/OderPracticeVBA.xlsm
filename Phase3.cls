@@ -9,8 +9,10 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
+'************************************************************************************
 '廃棄フェイズ
-
+'ここで廃棄する → Store::DiscardItems
+'************************************************************************************
 Implements IPhase
 
 Public Sub IPhase_ExecutePhase()
@@ -21,7 +23,11 @@ Public Sub IPhase_ExecutePhase()
     Dim ws As Worksheet
     Set ws = Worksheets("main")
     
-    salesData_.SetLoss (Main.GetCabinet.DiscardItems)
+    Dim store_ As Store
+    Set store_ = Main.GetStore
+    store_.DiscardItems
+    
+    salesData_.SetLoss store_.GetDiscardNum
     MessagePrinter.WriteLine salesData_.GetLoss & "個廃棄しました。"
     Main.GetIndicator.UpdateRecord salesData_
     

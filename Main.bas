@@ -5,7 +5,7 @@ Private m_phases(0 To 4) As IPhase
 Private m_isInitialize As Boolean
 Private m_indicator As Indicator
 Private m_currentPhase As PhaseNumber
-Private m_Cabinet As Cabinet
+Private m_store As Store
 Private m_countDay As Integer
 
 Public Sub OnAdvanceTheTimeButtonClick()
@@ -37,7 +37,7 @@ Private Sub Initialize()
     DevelopmentTools.ClearImmediate
     
     Set m_indicator = New Indicator
-    Set m_Cabinet = New Cabinet
+    Set m_store = New Store
     m_currentPhase = PhaseNumber.START_0
     
     Set m_phases(0) = New Phase0
@@ -68,8 +68,8 @@ End Function
 Public Sub SetCurrentPhase(phase_ As PhaseNumber)
     m_currentPhase = phase_
 End Sub
-Public Function GetCabinet() As Cabinet
-    Set GetCabinet = m_Cabinet
+Public Function GetStore() As Store
+    Set GetStore = m_store
 End Function
 Public Function GetCountDay() As Integer
     GetCountDay = m_countDay

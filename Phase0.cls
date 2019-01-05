@@ -10,13 +10,21 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Implements IPhase
-
+'************************************************************************************
+'スタートフェイズ
+'ここで値引きする → Store::PriceCutItems
+'************************************************************************************
 Public Sub IPhase_ExecutePhase()
 
     MessagePrinter.ClearAll
        
     Dim salesData_ As SalesData
     Set salesData_ = Main.GetIndicator.GetRecord
+    
+    Dim store_ As Store
+    Set store_ = Main.GetStore
+    
+    store_.PriceCutItems
     
     TablePrinter.PrintCurrentRecordToTable salesData_
   
